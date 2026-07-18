@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Compass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1520; --bg-panel:#161E2B; --ink:#EAE3D2; --ink-dim:#9BA6B4; --ink-faint:#5C6B7D;
+    --accent:#C9A227; --grid:#28344A; --grid-strong:#3A4A66; --danger:#D8664A;
+    --quad-tl:rgba(120,150,220,0.06); --quad-tr:rgba(201,162,39,0.06);
+    --quad-bl:rgba(120,200,170,0.05); --quad-br:rgba(216,102,74,0.07);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1180px;margin:0 auto;padding:48px 28px 80px;}
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-bottom:1px solid var(--grid);padding-bottom:24px;margin-bottom:36px;flex-wrap:wrap;}
+  .titleblock h1{font-family:'Fraunces',serif;font-weight:600;font-size:42px;letter-spacing:-0.01em;margin:0 0 6px;}
+  .titleblock p{margin:0;color:var(--ink-dim);font-size:14.5px;max-width:480px;line-height:1.5;}
+  .bearing{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);text-align:right;line-height:1.6;letter-spacing:0.04em;}
+  main{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start;}
+  @media (max-width:900px){main{grid-template-columns:1fr;} .titleblock h1{font-size:32px;}}
+  .chart-panel{background:var(--bg-panel);border:1px solid var(--grid);border-radius:4px;padding:20px;position:relative;}
+  .chart-panel svg{width:100%;height:auto;display:block;}
+  .axis-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;fill:var(--ink-faint);text-transform:uppercase;}
+  .empty-note{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--ink-faint);font-size:13px;text-align:center;pointer-events:none;font-family:'JetBrains Mono',monospace;max-width:220px;}
+  .panel{background:var(--bg-panel);border:1px solid var(--grid);border-radius:4px;padding:20px;display:flex;flex-direction:column;gap:16px;}
+  .panel h2{font-family:'Fraunces',serif;font-size:18px;font-weight:600;margin:0;}
+  .add-row{display:flex;gap:8px;position:relative;}
+  input[type=text]{flex:1;background:var(--bg);border:1px solid var(--grid-strong);color:var(--ink);padding:10px 12px;border-radius:3px;font-family:'Inter',sans-serif;font-size:14px;outline:none;}
+  input[type=text]:focus{border-color:var(--accent);}
+  input[type=text]::placeholder{color:var(--ink-faint);}
+  button.primary{background:var(--accent);color:#211A05;border:none;padding:10px 16px;border-radius:3px;font-weight:600;font-size:13.5px;cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif;}
+  button.primary:hover{filter:brightness(1.08);}
+  .hint{font-size:12px;color:var(--ink-faint);line-height:1.5;margin:0;}
+  .error{font-size:12.5px;color:var(--danger);background:rgba(216,102,74,0.1);border:1px solid rgba(216,102,74,0.3);padding:8px 10px;border-radius:3px;display:none;}
+  .suggestions{position:absolute;top:100%;left:0;right:74px;background:var(--bg-panel);border:1px solid var(--grid-strong);border-top:none;border-radius:0 0 3px 3px;z-index:10;max-height:200px;overflow-y:auto;display:none;}
+  .suggestion{padding:8px 12px;cursor:pointer;font-size:13px;border-bottom:1px solid var(--grid);}
+  .suggestion:last-child{border-bottom:none;}
+  .suggestion:hover{background:var(--bg);}
+  .suggestion .s-country{color:var(--ink-faint);font-size:11px;font-family:'JetBrains Mono',monospace;}
+  .manual-box{border:1px dashed var(--grid-strong);border-radius:3px;padding:12px;font-size:12.5px;color:var(--ink-dim);display:none;line-height:1.5;}
+  .manual-box button{margin-top:8px;background:none;border:1px solid var(--accent);color:var(--accent);padding:6px 10px;border-radius:3px;cursor:pointer;font-size:12px;font-family:'Inter',sans-serif;}
+  .entries{display:flex;flex-direction:column;gap:2px;max-height:380px;overflow-y:auto;margin-top:4px;}
+  .entry{display:flex;align-items:flex-start;gap:10px;padding:10px 4px;border-bottom:1px solid var(--grid);}
+  .entry:last-child{border-bottom:none;}
+  .dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+  .entry-body{flex:1;min-width:0;}
+  .entry-name{font-size:13.5px;font-weight:600;color:var(--ink);}
+  .entry-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-faint);margin-top:2px;}
+  .entry-blurb{font-size:12px;color:var(--ink-dim);margin-top:4px;line-height:1.4;}
+  .entry-remove{background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:16px;line-height:1;padding:2px 4px;font-family:'Inter',sans-serif;}
+  .entry-remove:hover{color:var(--danger);}
+  .empty-list{color:var(--ink-faint);font-size:13px;padding:8px 0;}
+  .clear-all{background:none;border:1px solid var(--grid-strong);color:var(--ink-dim);font-size:12px;padding:7px 10px;border-radius:3px;cursor:pointer;font-family:'Inter',sans-serif;align-self:flex-start;}
+  .clear-all:hover{border-color:var(--danger);color:var(--danger);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="titleblock">
+      <h1>The Compass</h1>
+      <p>Type in any politician. Matched against a built-in list of ~100 figures — no AI calls, no cost. Not found? Place them yourself by clicking the chart. Drag any point to correct it.</p>
+    </div>
+    <div class="bearing">N 51°30&#39; LIBERTARIAN<br>S 51°30&#39; AUTHORITARIAN<br>W 000° LEFT — E 000° RIGHT</div>
+  </header>
+
+  <main>
+    <div class="chart-panel">
+      <svg id="chart" viewBox="0 0 640 640" role="img" aria-label="Political compass scatter chart"></svg>
+      <div class="empty-note" id="emptyNote">No points plotted yet.<br>Search a name, or click the chart to place one manually.</div>
+    </div>
+
+    <div class="panel">
+      <h2>Add a figure</h2>
+      <div class="add-row">
+        <input type="text" id="nameInput" placeholder="e.g. trump, starmer, mandela" autocomplete="off" />
+        <button class="primary" id="addBtn">Plot</button>
+        <div class="suggestions" id="suggestions"></div>
+      </div>
+      <p class="hint">Matches names and common nicknames in the built-in list. Estimates reflect general political-science characterizations, not settled fact.</p>
+      <div class="error" id="errorBox"></div>
+      <div class="manual-box" id="manualBox">
+        No match found for "<span id="manualName"></span>".
+        <button id="manualPlaceBtn">Click chart to place manually</button>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 style="font-size:15px;">Plotted (<span id="countLabel">0</span>)</h2>
+        <button class="clear-all" id="clearAllBtn">Clear all</button>
+      </div>
+      <div class="entries" id="entriesList"></div>
+    </div>
+  </main>
+</div>
+
+<script src="data.js"></script>
+<script>
+const STORAGE_KEY = 'compass-entries-v2';
+let entries = [];
+let dragTarget = null;
+let manualPlacementMode = false;
+let manualPendingName = '';
+
+const PALETTE = ['#C9A227','#7896DC','#D8664A','#6FBF9A','#B57BDB','#E0A458','#5CA6B0','#C97CA6','#8FA34E','#D8887A'];
+function colorFor(country){
+  let h = 0;
+  for(let i=0;i<country.length;i++) h = (h*31 + country.charCodeAt(i)) >>> 0;
+  return PALETTE[h % PALETTE.length];
+}
+
+const svg = document.getElementById('chart');
+const cx = 320, cy = 320, scale = 25.5;
+
+function buildStaticChart(){
+  const ns = "http://www.w3.org/2000/svg";
+  svg.innerHTML = '';
+  const quads = [[20,20,300,300,'var(--quad-tl)'],[320,20,300,300,'var(--quad-tr)'],[20,320,300,300,'var(--quad-bl)'],[320,320,300,300,'var(--quad-br)']];
+  quads.forEach(q=>{
+    const r = document.createElementNS(ns,'rect');
+    r.setAttribute('x',q[0]);r.setAttribute('y',q[1]);r.setAttribute('width',q[2]);r.setAttribute('height',q[3]);r.setAttribute('fill',q[4]);
+    svg.appendChild(r);
+  });
+  for(let deg=0; deg<360; deg+=15){
+    const rad = deg*Math.PI/180;
+    const isMajor = deg % 90 === 0;
+    const rOuter = isMajor ? 312 : 300, rInner = 296;
+    const x1 = cx + rInner*Math.cos(rad), y1 = cy + rInner*Math.sin(rad);
+    const x2 = cx + rOuter*Math.cos(rad), y2 = cy + rOuter*Math.sin(rad);
+    const line = document.createElementNS(ns,'line');
+    line.setAttribute('x1',x1);line.setAttribute('y1',y1);line.setAttribute('x2',x2);line.setAttribute('y2',y2);
+    line.setAttribute('stroke','var(--grid-strong)');line.setAttribute('stroke-width', isMajor ? 1.4 : 0.7);
+    svg.appendChild(line);
+  }
+  for(let g=-10; g<=10; g+=2.5){
+    const gx = cx + g*scale, gy = cy - g*scale;
+    const vl = document.createElementNS(ns,'line');
+    vl.setAttribute('x1',gx);vl.setAttribute('y1',20);vl.setAttribute('x2',gx);vl.setAttribute('y2',620);
+    vl.setAttribute('stroke','var(--grid)');vl.setAttribute('stroke-width',0.5);
+    svg.appendChild(vl);
+    const hl = document.createElementNS(ns,'line');
+    hl.setAttribute('x1',20);hl.setAttribute('y1',gy);hl.setAttribute('x2',620);hl.setAttribute('y2',gy);
+    hl.setAttribute('stroke','var(--grid)');hl.setAttribute('stroke-width',0.5);
+    svg.appendChild(hl);
+  }
+  [[cx,20,cx,620],[20,cy,620,cy]].forEach(c=>{
+    const line = document.createElementNS(ns,'line');
+    line.setAttribute('x1',c[0]);line.setAttribute('y1',c[1]);line.setAttribute('x2',c[2]);line.setAttribute('y2',c[3]);
+    line.setAttribute('stroke','var(--grid-strong)');line.setAttribute('stroke-width',1.2);
+    svg.appendChild(line);
+  });
+  [[320,12,'LIBERTARIAN','middle'],[320,634,'AUTHORITARIAN','middle'],[16,330,'LEFT','start'],[624,330,'RIGHT','end']].forEach(l=>{
+    const t = document.createElementNS(ns,'text');
+    t.setAttribute('x',l[0]);t.setAttribute('y',l[1]);
+    t.setAttribute('text-anchor',l[3]);
+    t.setAttribute('class','axis-label');
+    t.textContent = l[2];
+    svg.appendChild(t);
+  });
+  const g = document.createElementNS(ns,'g');
+  g.setAttribute('id','pointsGroup');
+  svg.appendChild(g);
+}
+
+function renderPoints(){
+  const ns = "http://www.w3.org/2000/svg";
+  const g = document.getElementById('pointsGroup');
+  g.innerHTML = '';
+  document.getElementById('emptyNote').style.display = entries.length ? 'none' : 'block';
+  entries.forEach((e,i)=>{
+    const x = cx + e.x*scale, y = cy - e.y*scale;
+    const color = colorFor(e.country || 'Unknown');
+    const circle = document.createElementNS(ns,'circle');
+    circle.setAttribute('cx',x);circle.setAttribute('cy',y);circle.setAttribute('r',11);
+    circle.setAttribute('fill',color);circle.setAttribute('stroke','#0F1520');circle.setAttribute('stroke-width',1.5);
+    circle.style.cursor = 'grab';
+    circle.addEventListener('pointerdown', (ev)=>startDrag(ev, i));
+    g.appendChild(circle);
+    const text = document.createElementNS(ns,'text');
+    text.setAttribute('x',x);text.setAttribute('y',y+3.5);
+    text.setAttribute('text-anchor','middle');text.setAttribute('font-size','10');
+    text.setAttribute('font-family','JetBrains Mono, monospace');
+    text.setAttribute('fill','#161E2B');text.setAttribute('font-weight','600');
+    text.setAttribute('pointer-events','none');
+    text.textContent = i+1;
+    g.appendChild(text);
+  });
+}
+
+function startDrag(ev, index){
+  dragTarget = index;
+  ev.target.setPointerCapture(ev.pointerId);
+  ev.target.style.cursor = 'grabbing';
+}
+svg.addEventListener('pointermove', (ev)=>{
+  if(dragTarget===null) return;
+  const {nx, ny} = pointerToCoords(ev);
+  entries[dragTarget].x = nx; entries[dragTarget].y = ny;
+  renderPoints();
+});
+window.addEventListener('pointerup', ()=>{
+  if(dragTarget!==null){ dragTarget = null; save(); }
+});
+
+function pointerToCoords(ev){
+  const rect = svg.getBoundingClientRect();
+  const scaleFactor = 640/rect.width;
+  const px = (ev.clientX-rect.left)*scaleFactor;
+  const py = (ev.clientY-rect.top)*scaleFactor;
+  let nx = (px-cx)/scale, ny = (cy-py)/scale;
+  nx = Math.max(-10,Math.min(10,Math.round(nx*10)/10));
+  ny = Math.max(-10,Math.min(10,Math.round(ny*10)/10));
+  return {nx, ny};
+}
+
+svg.addEventListener('click', (ev)=>{
+  if(!manualPlacementMode) return;
+  const {nx, ny} = pointerToCoords(ev);
+  entries.push({name: manualPendingName, country:'', dates:'', x:nx, y:ny, blurb:'Placed manually.'});
+  manualPlacementMode = false;
+  svg.style.cursor = 'default';
+  document.getElementById('manualBox').style.display = 'none';
+  document.getElementById('nameInput').value = '';
+  renderAll();
+  save();
+});
+
+function renderList(){
+  const list = document.getElementById('entriesList');
+  document.getElementById('countLabel').textContent = entries.length;
+  list.innerHTML = '';
+  if(!entries.length){
+    list.innerHTML = '<div class="empty-list">Nothing plotted yet.</div>';
+    return;
+  }
+  entries.forEach((e,i)=>{
+    const row = document.createElement('div');
+    row.className = 'entry';
+    const color = colorFor(e.country || 'Unknown');
+    row.innerHTML = `
+      <div class="dot" style="background:${color}"></div>
+      <div class="entry-body">
+        <div class="entry-name">${i+1}. ${escapeHtml(e.name)}</div>
+        <div class="entry-meta">${escapeHtml(e.country||'')} · ${escapeHtml(e.dates||'')}</div>
+        <div class="entry-blurb">${escapeHtml(e.blurb||'')}</div>
+      </div>
+      <button class="entry-remove" data-i="${i}" aria-label="Remove">&times;</button>
+    `;
+    list.appendChild(row);
+  });
+  list.querySelectorAll('.entry-remove').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      entries.splice(parseInt(btn.dataset.i),1);
+      renderAll();
+      save();
+    });
+  });
+}
+
+function escapeHtml(s){
+  const d = document.createElement('div');
+  d.textContent = s || '';
+  return d.innerHTML;
+}
+function renderAll(){ renderPoints(); renderList(); }
+
+function save(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(entries)); }catch(err){ console.error('Save failed', err); }
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) entries = JSON.parse(raw);
+  }catch(err){ entries = []; }
+  renderAll();
+}
+
+function showError(msg){
+  const box = document.getElementById('errorBox');
+  box.textContent = msg; box.style.display = 'block';
+}
+function clearError(){ document.getElementById('errorBox').style.display = 'none'; }
+
+// --- matching ---
+function normalize(s){
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,'').trim();
+}
+function levenshtein(a,b){
+  const m=a.length,n=b.length;
+  const dp = Array.from({length:m+1},()=>new Array(n+1).fill(0));
+  for(let i=0;i<=m;i++) dp[i][0]=i;
+  for(let j=0;j<=n;j++) dp[0][j]=j;
+  for(let i=1;i<=m;i++){
+    for(let j=1;j<=n;j++){
+      dp[i][j] = a[i-1]===b[j-1] ? dp[i-1][j-1] : 1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+    }
+  }
+  return dp[m][n];
+}
+function findMatches(query){
+  const q = normalize(query);
+  if(!q) return [];
+  const scored = [];
+  POLITICIANS.forEach(p=>{
+    const candidates = [normalize(p.name), ...p.aliases.map(normalize)];
+    let best = Infinity;
+    candidates.forEach(c=>{
+      if(c === q) best = Math.min(best, 0);
+      else if(c.includes(q) || q.includes(c)) best = Math.min(best, 1);
+      else best = Math.min(best, levenshtein(q,c) / Math.max(c.length, q.length) * 10);
+    });
+    scored.push({p, score:best});
+  });
+  scored.sort((a,b)=>a.score-b.score);
+  return scored.filter(s=>s.score < 4).slice(0,6);
+}
+
+function renderSuggestions(query){
+  const box = document.getElementById('suggestions');
+  const matches = findMatches(query);
+  if(!query.trim() || !matches.length){
+    box.style.display = 'none';
+    box.innerHTML = '';
+    return;
+  }
+  box.innerHTML = '';
+  matches.forEach(m=>{
+    const row = document.createElement('div');
+    row.className = 'suggestion';
+    row.innerHTML = `${escapeHtml(m.p.name)} <span class="s-country">${escapeHtml(m.p.country)}</span>`;
+    row.addEventListener('click', ()=>{
+      addEntry(m.p);
+      document.getElementById('nameInput').value = '';
+      box.style.display = 'none';
+    });
+    box.appendChild(row);
+  });
+  box.style.display = 'block';
+}
+
+function addEntry(p){
+  entries.push({name:p.name, country:p.country, dates:p.dates, x:p.x, y:p.y, blurb:p.blurb});
+  renderAll();
+  save();
+}
+
+function plotName(){
+  const input = document.getElementById('nameInput');
+  const name = input.value.trim();
+  if(!name) return;
+  clearError();
+  document.getElementById('manualBox').style.display = 'none';
+  document.getElementById('suggestions').style.display = 'none';
+
+  const matches = findMatches(name);
+  if(matches.length && matches[0].score < 2.5){
+    addEntry(matches[0].p);
+    input.value = '';
+  } else {
+    manualPendingName = name;
+    document.getElementById('manualName').textContent = name;
+    document.getElementById('manualBox').style.display = 'block';
+  }
+}
+
+document.getElementById('addBtn').addEventListener('click', plotName);
+document.getElementById('nameInput').addEventListener('input', (e)=> renderSuggestions(e.target.value));
+document.getElementById('nameInput').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter') plotName();
+  if(e.key === 'Escape') document.getElementById('suggestions').style.display = 'none';
+});
+document.addEventListener('click', (e)=>{
+  if(!e.target.closest('.add-row')) document.getElementById('suggestions').style.display = 'none';
+});
+document.getElementById('manualPlaceBtn').addEventListener('click', ()=>{
+  manualPlacementMode = true;
+  svg.style.cursor = 'crosshair';
+});
+document.getElementById('clearAllBtn').addEventListener('click', ()=>{
+  entries = []; renderAll(); save();
+});
+
+buildStaticChart();
+load();
+</script>
+</body>
+</html>
