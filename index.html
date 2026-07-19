@@ -411,7 +411,6 @@ document.getElementById('clearAllBtn').addEventListener('click', ()=>{
 function updateBearing(){
   const m = MODES[currentMode];
   document.getElementById('bearing').innerHTML = `N 51°30&#39; ${m.top}<br>S 51°30&#39; ${m.bottom}<br>W 000° LEFT — E 000° RIGHT`;
-  document.getElementById('subtitle').textContent = m.subtitle;
   document.getElementById('nameInput').placeholder = m.placeholder;
 }
 
