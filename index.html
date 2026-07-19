@@ -115,15 +115,13 @@ const MODES = {
     key: 'compass-entries-politicians',
     data: () => POLITICIANS,
     top: 'LIBERTARIAN', bottom: 'AUTHORITARIAN',
-    subtitle: 'Type in any politician. Matched against a built-in list — no AI calls, no cost. Not found? Place them yourself by clicking the chart. Drag any point to correct it.',
-    placeholder: 'e.g. trump, starmer, mandela'
+    placeholder: 'e.g. Trump, Starmer, Mandela'
   },
   media: {
     key: 'compass-entries-media',
     data: () => MEDIA_OUTLETS,
     top: 'RELIABLE', bottom: 'SENSATIONALIST',
-    subtitle: 'Type in any news outlet. Vertical axis is reporting reliability, not politics. Not found? Place it yourself by clicking the chart.',
-    placeholder: 'e.g. bbc, fox news, the guardian'
+    placeholder: 'e.g. BBC, Fox News, The Guardian'
   }
 };
 let currentMode = 'politicians';
