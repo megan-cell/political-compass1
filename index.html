@@ -20,6 +20,10 @@
   .titleblock h1{font-family:'Fraunces',serif;font-weight:600;font-size:42px;letter-spacing:-0.01em;margin:0 0 6px;}
   .titleblock p{margin:0;color:var(--ink-dim);font-size:14.5px;max-width:480px;line-height:1.5;}
   .bearing{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);text-align:right;line-height:1.6;letter-spacing:0.04em;}
+  .toggle-group{display:flex;border:1px solid var(--grid-strong);border-radius:4px;overflow:hidden;}
+  .toggle-btn{background:var(--bg-panel);color:var(--ink-dim);border:none;padding:7px 14px;font-size:12.5px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;}
+  .toggle-btn.active{background:var(--accent);color:#211A05;}
+  .toggle-btn:not(.active):hover{background:var(--bg-panel-hover);}
   main{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start;}
   @media (max-width:900px){main{grid-template-columns:1fr;} .titleblock h1{font-size:32px;}}
   .chart-panel{background:var(--bg-panel);border:1px solid var(--grid);border-radius:4px;padding:20px;position:relative;}
@@ -62,9 +66,16 @@
 <div class="wrap">
   <header>
     <div class="titleblock">
-      <h1>The Compass</h1>     
+      <h1>The Compass</h1>
+      <p id="subtitle">Type in any politician. Matched against a built-in list — no AI calls, no cost. Not found? Place them yourself by clicking the chart. Drag any point to correct it.</p>
     </div>
-    <div class="bearing">N 51°30&#39; LIBERTARIAN<br>S 51°30&#39; AUTHORITARIAN<br>W 000° LEFT — E 000° RIGHT</div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+      <div class="toggle-group" id="toggleGroup">
+        <button class="toggle-btn active" data-mode="politicians">Politicians</button>
+        <button class="toggle-btn" data-mode="media">Media</button>
+      </div>
+      <div class="bearing" id="bearing">N 51°30&#39; LIBERTARIAN<br>S 51°30&#39; AUTHORITARIAN<br>W 000° LEFT — E 000° RIGHT</div>
+    </div>
   </header>
 
   <main>
@@ -76,10 +87,11 @@
     <div class="panel">
       <h2>Add a figure</h2>
       <div class="add-row">
-        <input type="text" id="nameInput" placeholder="e.g. Trump, Starmer, Mandela" autocomplete="off" />
+        <input type="text" id="nameInput" placeholder="e.g. trump, starmer, mandela" autocomplete="off" />
         <button class="primary" id="addBtn">Plot</button>
         <div class="suggestions" id="suggestions"></div>
       </div>
+      <p class="hint">Matches names and common nicknames in the built-in list. Estimates reflect general political-science characterizations, not settled fact.</p>
       <div class="error" id="errorBox"></div>
       <div class="manual-box" id="manualBox">
         No match found for "<span id="manualName"></span>".
@@ -96,8 +108,26 @@
 </div>
 
 <script src="data.js"></script>
+<script src="media-data.js"></script>
 <script>
-const STORAGE_KEY = 'compass-entries-v2';
+const MODES = {
+  politicians: {
+    key: 'compass-entries-politicians',
+    data: () => POLITICIANS,
+    top: 'LIBERTARIAN', bottom: 'AUTHORITARIAN',
+    subtitle: 'Type in any politician. Matched against a built-in list — no AI calls, no cost. Not found? Place them yourself by clicking the chart. Drag any point to correct it.',
+    placeholder: 'e.g. trump, starmer, mandela'
+  },
+  media: {
+    key: 'compass-entries-media',
+    data: () => MEDIA_OUTLETS,
+    top: 'RELIABLE', bottom: 'SENSATIONALIST',
+    subtitle: 'Type in any news outlet. Vertical axis is reporting reliability, not politics. Not found? Place it yourself by clicking the chart.',
+    placeholder: 'e.g. bbc, fox news, the guardian'
+  }
+};
+let currentMode = 'politicians';
+let STORAGE_KEY = MODES[currentMode].key;
 let entries = [];
 let dragTarget = null;
 let manualPlacementMode = false;
@@ -150,7 +180,7 @@ function buildStaticChart(){
     line.setAttribute('stroke','var(--grid-strong)');line.setAttribute('stroke-width',1.2);
     svg.appendChild(line);
   });
-  [[320,12,'LIBERTARIAN','middle'],[320,634,'AUTHORITARIAN','middle'],[16,330,'LEFT','start'],[624,330,'RIGHT','end']].forEach(l=>{
+  [[320,12,MODES[currentMode].top,'middle'],[320,634,MODES[currentMode].bottom,'middle'],[16,330,'LEFT','start'],[624,330,'RIGHT','end']].forEach(l=>{
     const t = document.createElementNS(ns,'text');
     t.setAttribute('x',l[0]);t.setAttribute('y',l[1]);
     t.setAttribute('text-anchor',l[3]);
@@ -302,7 +332,7 @@ function findMatches(query){
   const q = normalize(query);
   if(!q) return [];
   const scored = [];
-  POLITICIANS.forEach(p=>{
+  MODES[currentMode].data().forEach(p=>{
     const candidates = [normalize(p.name), ...p.aliases.map(normalize)];
     let best = Infinity;
     candidates.forEach(c=>{
@@ -379,6 +409,33 @@ document.getElementById('manualPlaceBtn').addEventListener('click', ()=>{
 });
 document.getElementById('clearAllBtn').addEventListener('click', ()=>{
   entries = []; renderAll(); save();
+});
+
+function updateBearing(){
+  const m = MODES[currentMode];
+  document.getElementById('bearing').innerHTML = `N 51°30&#39; ${m.top}<br>S 51°30&#39; ${m.bottom}<br>W 000° LEFT — E 000° RIGHT`;
+  document.getElementById('subtitle').textContent = m.subtitle;
+  document.getElementById('nameInput').placeholder = m.placeholder;
+}
+
+function switchMode(mode){
+  if(mode === currentMode) return;
+  currentMode = mode;
+  STORAGE_KEY = MODES[currentMode].key;
+  document.querySelectorAll('.toggle-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.mode === mode);
+  });
+  updateBearing();
+  document.getElementById('nameInput').value = '';
+  document.getElementById('suggestions').style.display = 'none';
+  document.getElementById('manualBox').style.display = 'none';
+  clearError();
+  buildStaticChart();
+  load();
+}
+document.getElementById('toggleGroup').addEventListener('click', (e)=>{
+  const btn = e.target.closest('.toggle-btn');
+  if(btn) switchMode(btn.dataset.mode);
 });
 
 buildStaticChart();
