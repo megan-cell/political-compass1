@@ -30,10 +30,10 @@ const POLITICIANS = [
   {name:"Recep Tayyip Erdoğan", country:"Turkey", dates:"2003–present", x:2, y:-5.5, blurb:"Conservative-nationalist, growing executive power.", aliases:["erdogan","recep tayyip erdogan"]},
 
   // --- 20th century dictators/leaders ---
-  {name:"Adolf Hitler", country:"Germany", dates:"1933–1945", x:1, y:-10, blurb:"Fascist totalitarian dictatorship.", aliases:["hitler","adolf hitler"]},
-  {name:"Joseph Stalin", country:"Soviet Union", dates:"1924–1953", x:-9.5, y:-9.5, blurb:"Totalitarian command economy, mass purges.", aliases:["stalin"]},
+  {name:"Adolf Hitler", country:"Germany", dates:"1933–1945", x:1, y:-10, blurb:"Fascist totalitarian dictatorship.", aliases:["hitler","adolf hitler"], flags:["warcrimes"]},
+  {name:"Joseph Stalin", country:"Soviet Union", dates:"1924–1953", x:-9.5, y:-9.5, blurb:"Totalitarian command economy, mass purges.", aliases:["stalin"], flags:["warcrimes"]},
   {name:"Mao Zedong", country:"China", dates:"1949–1976", x:-9.5, y:-9, blurb:"Communist revolution, Cultural Revolution repression.", aliases:["mao","mao zedong"]},
-  {name:"Benito Mussolini", country:"Italy", dates:"1922–1943", x:2, y:-9, blurb:"Fascist corporatist state.", aliases:["mussolini"]},
+  {name:"Benito Mussolini", country:"Italy", dates:"1922–1943", x:2, y:-9, blurb:"Fascist corporatist state.", aliases:["mussolini"], flags:["warcrimes"]},
   {name:"Francisco Franco", country:"Spain", dates:"1939–1975", x:4, y:-8.5, blurb:"Right-wing nationalist military dictatorship.", aliases:["franco","francisco franco"]},
   {name:"Augusto Pinochet", country:"Chile", dates:"1973–1990", x:6, y:-8, blurb:"Free-market reforms under brutal military rule.", aliases:["pinochet"]},
   {name:"Pol Pot", country:"Cambodia", dates:"1975–1979", x:-9, y:-10, blurb:"Agrarian communist genocide.", aliases:["pol pot"]},
@@ -298,5 +298,182 @@ const POLITICIANS = [
   {name:"Mohammed VI", country:"Morocco", dates:"King, 1999–present", x:3, y:-4, blurb:"Constitutional monarch with substantial personal power.", aliases:["mohammed vi","king mohammed vi"]},
   {name:"Nicolas Sarkozy", country:"France", dates:"President, 2007–2012", x:5, y:0, blurb:"Center-right; later convicted of corruption offenses.", aliases:["nicolas sarkozy","sarkozy"], flags:["corruption"]},
   {name:"Park Geun-hye", country:"South Korea", dates:"President, 2013–2017 (impeached)", x:4, y:-2, blurb:"Conservative; impeached and convicted of corruption.", aliases:["park geun-hye","park geun hye"], flags:["corruption"]},
-  {name:"Alberto Fujimori", country:"Peru", dates:"President, 1990–2000", x:5, y:-6, blurb:"Authoritarian; later convicted of corruption and human rights crimes.", aliases:["alberto fujimori","fujimori"], flags:["warcrimes","corruption"]}
+  {name:"Alberto Fujimori", country:"Peru", dates:"President, 1990–2000", x:5, y:-6, blurb:"Authoritarian; later convicted of corruption and human rights crimes.", aliases:["alberto fujimori","fujimori"], flags:["warcrimes","corruption"]},
+
+  // --- UK historical PMs ---
+  {name:"Clement Attlee", country:"United Kingdom", dates:"1945–1951", x:-6, y:3, blurb:"Labour, founded NHS and welfare state.", aliases:["clement attlee","attlee"]},
+  {name:"Harold Wilson", country:"United Kingdom", dates:"1964–1970, 1974–1976", x:-4, y:3, blurb:"Labour, modernizing centrist.", aliases:["harold wilson","wilson uk"]},
+  {name:"Edward Heath", country:"United Kingdom", dates:"1970–1974", x:2, y:2, blurb:"One-nation Conservative, took UK into EEC.", aliases:["edward heath","heath"]},
+  {name:"James Callaghan", country:"United Kingdom", dates:"1976–1979", x:-3, y:3, blurb:"Labour, faced Winter of Discontent.", aliases:["james callaghan","callaghan"]},
+  {name:"Michael Foot", country:"United Kingdom", dates:"Labour leader 1980–1983", x:-8, y:5, blurb:"Democratic socialist, strong civil-liberties record.", aliases:["michael foot"]},
+  {name:"Neil Kinnock", country:"United Kingdom", dates:"Labour leader 1983–1992", x:-5, y:4, blurb:"Center-left, modernized Labour.", aliases:["neil kinnock","kinnock"]},
+  {name:"John Smith", country:"United Kingdom", dates:"Labour leader 1992–1994", x:-4, y:4, blurb:"Center-left Labour.", aliases:["john smith uk"]},
+  {name:"Stanley Baldwin", country:"United Kingdom", dates:"1923–1924, 1924–1929, 1935–1937", x:3, y:1, blurb:"Conservative, interwar consensus politics.", aliases:["stanley baldwin","baldwin"]},
+  {name:"David Lloyd George", country:"United Kingdom", dates:"1916–1922", x:-2, y:2, blurb:"Liberal, WWI leadership, welfare reforms.", aliases:["david lloyd george","lloyd george"]},
+  {name:"Anthony Eden", country:"United Kingdom", dates:"1955–1957", x:3, y:1, blurb:"Conservative, resigned over Suez Crisis.", aliases:["anthony eden","eden"]},
+  {name:"Alec Douglas-Home", country:"United Kingdom", dates:"1963–1964", x:3, y:2, blurb:"Conservative, brief tenure.", aliases:["alec douglas-home","douglas-home"]},
+
+  // --- Ireland ---
+  {name:"Micheál Martin", country:"Ireland", dates:"Taoiseach, 2020–2022, 2024–present", x:0, y:3, blurb:"Centrist Fianna Fáil.", aliases:["micheal martin","martin ireland"]},
+  {name:"Simon Harris", country:"Ireland", dates:"Taoiseach, 2024", x:1, y:3, blurb:"Centrist Fine Gael.", aliases:["simon harris"]},
+  {name:"Bertie Ahern", country:"Ireland", dates:"Taoiseach, 1997–2008", x:0, y:2, blurb:"Centrist Fianna Fáil, Good Friday Agreement.", aliases:["bertie ahern","ahern"]},
+  {name:"Enda Kenny", country:"Ireland", dates:"Taoiseach, 2011–2017", x:1, y:2, blurb:"Center-right Fine Gael, austerity-era leadership.", aliases:["enda kenny","kenny ireland"]},
+  {name:"Mary Lou McDonald", country:"Ireland", dates:"Sinn Féin leader, 2018–present", x:-5, y:3, blurb:"Left-wing, Irish reunification focus.", aliases:["mary lou mcdonald","mcdonald"]},
+
+  // --- Austria, Belgium, Portugal, Iceland, Luxembourg ---
+  {name:"Karl Nehammer", country:"Austria", dates:"Chancellor, 2021–2024", x:3, y:0, blurb:"Center-right ÖVP.", aliases:["karl nehammer","nehammer"]},
+  {name:"Sebastian Kurz", country:"Austria", dates:"Chancellor, 2017–2019, 2020–2021", x:4, y:-1, blurb:"Right-leaning ÖVP, later resigned amid scandal.", aliases:["sebastian kurz","kurz"]},
+  {name:"Bart De Wever", country:"Belgium", dates:"Prime Minister, 2025–present", x:5, y:-1, blurb:"Flemish nationalist, right-leaning.", aliases:["bart de wever","de wever"]},
+  {name:"Alexander De Croo", country:"Belgium", dates:"Prime Minister, 2020–2025", x:2, y:2, blurb:"Center-right liberal.", aliases:["alexander de croo","de croo"]},
+  {name:"António Costa", country:"Portugal", dates:"Prime Minister, 2015–2024", x:-3, y:3, blurb:"Center-left Socialist.", aliases:["antonio costa","costa portugal"]},
+  {name:"Luís Montenegro", country:"Portugal", dates:"Prime Minister, 2024–present", x:2, y:2, blurb:"Center-right.", aliases:["luis montenegro","montenegro"]},
+  {name:"Katrín Jakobsdóttir", country:"Iceland", dates:"Prime Minister, 2017–2024", x:-6, y:5, blurb:"Left-Green, coalition leader.", aliases:["katrin jakobsdottir","jakobsdottir"]},
+
+  // --- Africa ---
+  {name:"Bassirou Diomaye Faye", country:"Senegal", dates:"President, 2024–present", x:-5, y:2, blurb:"Left-leaning reformist, youngest elected African president.", aliases:["bassirou diomaye faye","diomaye faye"]},
+  {name:"Macky Sall", country:"Senegal", dates:"President, 2012–2024", x:-1, y:0, blurb:"Center-left, controversial third-term attempt.", aliases:["macky sall","sall"]},
+  {name:"Alassane Ouattara", country:"Ivory Coast", dates:"President, 2011–present", x:2, y:-3, blurb:"Market-friendly, extended tenure controversy.", aliases:["alassane ouattara","ouattara"]},
+  {name:"Assimi Goïta", country:"Mali", dates:"President, 2021–present (coup leader)", x:-1, y:-8, blurb:"Military junta leader after coups.", aliases:["assimi goita","goita"]},
+  {name:"Ibrahim Traoré", country:"Burkina Faso", dates:"President, 2022–present (coup leader)", x:-3, y:-8, blurb:"Military junta leader, anti-Western rhetoric.", aliases:["ibrahim traore","traore"]},
+  {name:"Abdel Fattah al-Burhan", country:"Sudan", dates:"Leader, 2019–present", x:1, y:-8, blurb:"Military leader amid ongoing civil war.", aliases:["al-burhan","burhan"]},
+  {name:"João Lourenço", country:"Angola", dates:"President, 2017–present", x:-2, y:-3, blurb:"MPLA, limited political pluralism.", aliases:["joao lourenco","lourenco"]},
+  {name:"José Eduardo dos Santos", country:"Angola", dates:"President, 1979–2017", x:-3, y:-6, blurb:"Long one-party MPLA rule.", aliases:["jose eduardo dos santos","dos santos"]},
+  {name:"Filipe Nyusi", country:"Mozambique", dates:"President, 2015–2025", x:-3, y:-4, blurb:"FRELIMO, one-party dominance.", aliases:["filipe nyusi","nyusi"]},
+  {name:"Mokgweetsi Masisi", country:"Botswana", dates:"President, 2018–2024", x:1, y:2, blurb:"Center-right, stable democracy.", aliases:["mokgweetsi masisi","masisi"]},
+  {name:"Hage Geingob", country:"Namibia", dates:"President, 2015–2024", x:-3, y:2, blurb:"SWAPO, center-left.", aliases:["hage geingob","geingob"]},
+  {name:"Julius Malema", country:"South Africa", dates:"EFF leader, 2013–present", x:-8, y:-1, blurb:"Radical left, land-reform focus.", aliases:["julius malema","malema"]},
+  {name:"Helen Zille", country:"South Africa", dates:"Former DA leader", x:4, y:3, blurb:"Center-right Democratic Alliance.", aliases:["helen zille","zille"]},
+
+  // --- Asia further ---
+  {name:"Jiang Zemin", country:"China", dates:"1993–2003", x:-4, y:-7, blurb:"Market reforms continued, one-party control.", aliases:["jiang zemin","jiang"]},
+  {name:"Zhou Enlai", country:"China", dates:"Premier, 1949–1976", x:-6, y:-6, blurb:"Founding Communist premier.", aliases:["zhou enlai","zhou"]},
+  {name:"Li Qiang", country:"China", dates:"Premier, 2023–present", x:-4, y:-7, blurb:"State-directed economy, one-party rule.", aliases:["li qiang"]},
+  {name:"Nguyễn Phú Trọng", country:"Vietnam", dates:"Party leader, 2011–2024", x:-6, y:-6, blurb:"One-party communist rule.", aliases:["nguyen phu trong","trong"]},
+  {name:"Tô Lâm", country:"Vietnam", dates:"Party leader, 2024–present", x:-6, y:-6, blurb:"One-party communist rule.", aliases:["to lam"]},
+  {name:"Tsai Ing-wen", country:"Taiwan", dates:"President, 2016–2024", x:-2, y:4, blurb:"Center-left DPP, pro-democratic norms.", aliases:["tsai ing-wen","tsai"]},
+  {name:"Lai Ching-te", country:"Taiwan", dates:"President, 2024–present", x:-2, y:4, blurb:"Center-left DPP.", aliases:["lai ching-te","lai"]},
+  {name:"Ma Ying-jeou", country:"Taiwan", dates:"President, 2008–2016", x:2, y:3, blurb:"Center-right KMT, closer China ties.", aliases:["ma ying-jeou","ma"]},
+  {name:"Nursultan Nazarbayev", country:"Kazakhstan", dates:"President, 1991–2019", x:1, y:-7, blurb:"Long-ruling post-Soviet strongman.", aliases:["nursultan nazarbayev","nazarbayev"]},
+  {name:"Kassym-Jomart Tokayev", country:"Kazakhstan", dates:"President, 2019–present", x:1, y:-6, blurb:"Continued authoritarian governance.", aliases:["kassym-jomart tokayev","tokayev"]},
+  {name:"Hamid Karzai", country:"Afghanistan", dates:"President, 2001–2014", x:1, y:-2, blurb:"US-backed transitional leader.", aliases:["hamid karzai","karzai"]},
+  {name:"Ashraf Ghani", country:"Afghanistan", dates:"President, 2014–2021", x:1, y:-1, blurb:"Technocratic, government collapsed 2021.", aliases:["ashraf ghani","ghani"]},
+
+  // --- Middle East further ---
+  {name:"Nouri al-Maliki", country:"Iraq", dates:"Prime Minister, 2006–2014", x:-2, y:-5, blurb:"Sectarian-leaning, centralized power.", aliases:["nouri al-maliki","maliki"]},
+  {name:"Mustafa al-Kadhimi", country:"Iraq", dates:"Prime Minister, 2020–2022", x:0, y:-2, blurb:"Technocratic transitional leader.", aliases:["mustafa al-kadhimi","kadhimi"]},
+  {name:"Tamim bin Hamad Al Thani", country:"Qatar", dates:"Emir, 2013–present", x:4, y:-5, blurb:"Absolute monarch, market-driven diversification.", aliases:["tamim","emir of qatar"]},
+  {name:"Nayib Bukele", country:"El Salvador", dates:"President, 2019–present", x:2, y:-7, blurb:"Populist, mass-incarceration security crackdown.", aliases:["nayib bukele","bukele"]},
+  {name:"Miguel Díaz-Canel", country:"Cuba", dates:"President, 2018–present", x:-8, y:-7, blurb:"Continued one-party communist rule.", aliases:["miguel diaz-canel","diaz-canel"]},
+
+  // --- More US ---
+  {name:"Nancy Pelosi", country:"United States", dates:"House Speaker, 2007–2011, 2019–2023", x:-4, y:4, blurb:"Center-left Democrat, longtime House leader.", aliases:["nancy pelosi","pelosi"]},
+  {name:"Mike Johnson", country:"United States", dates:"House Speaker, 2023–present", x:6, y:-2, blurb:"Conservative Republican.", aliases:["mike johnson"]},
+  {name:"Kevin McCarthy", country:"United States", dates:"House Speaker, 2023", x:5, y:0, blurb:"Establishment Republican.", aliases:["kevin mccarthy","mccarthy"]},
+  {name:"Newt Gingrich", country:"United States", dates:"House Speaker, 1995–1999", x:6, y:0, blurb:"Conservative Republican revolution architect.", aliases:["newt gingrich","gingrich"]},
+  {name:"Al Gore", country:"United States", dates:"VP 1993–2001", x:-4, y:4, blurb:"Center-left Democrat, climate advocacy.", aliases:["al gore","gore"]},
+  {name:"Dick Cheney", country:"United States", dates:"VP 2001–2009", x:6, y:0, blurb:"Hawkish conservative Republican.", aliases:["dick cheney","cheney"]},
+  {name:"Mike Pence", country:"United States", dates:"VP 2017–2021", x:6, y:2, blurb:"Social conservative Republican.", aliases:["mike pence","pence"]},
+  {name:"Gavin Newsom", country:"United States", dates:"Governor of California, 2019–present", x:-5, y:4, blurb:"Progressive Democrat governor.", aliases:["gavin newsom","newsom"]},
+  {name:"Ron DeSantis", country:"United States", dates:"Governor of Florida, 2019–present", x:7, y:-2, blurb:"Right-wing Republican governor.", aliases:["ron desantis","desantis"]},
+  {name:"Greg Abbott", country:"United States", dates:"Governor of Texas, 2015–present", x:6, y:-1, blurb:"Conservative Republican governor.", aliases:["greg abbott","abbott texas"]},
+  {name:"Kathy Hochul", country:"United States", dates:"Governor of New York, 2021–present", x:-3, y:3, blurb:"Center-left Democrat governor.", aliases:["kathy hochul","hochul"]},
+  {name:"J.B. Pritzker", country:"United States", dates:"Governor of Illinois, 2019–present", x:-4, y:4, blurb:"Progressive Democrat governor.", aliases:["jb pritzker","pritzker"]},
+  {name:"Alexandria Ocasio-Cortez", country:"United States", dates:"Representative (NY), 2019–present", x:-8, y:6, blurb:"Progressive Democrat, strong civil-liberties positions.", aliases:["aoc","alexandria ocasio-cortez","ocasio-cortez"]},
+  {name:"Marjorie Taylor Greene", country:"United States", dates:"Representative (GA), 2021–present", x:8, y:-4, blurb:"Hard-right populist Republican.", aliases:["marjorie taylor greene","mtg"]},
+  {name:"Kevin de León", country:"United States", dates:"California state legislator", x:-5, y:3, blurb:"Progressive Democrat.", aliases:["kevin de leon"]},
+  {name:"Hillary Clinton", country:"United States", dates:"Secretary of State, 2009–2013", x:-2, y:4, blurb:"Center-left Democrat.", aliases:["hillary clinton"]},
+  {name:"John McCain", country:"United States", dates:"Senator (AZ), 1987–2018", x:4, y:2, blurb:"Establishment Republican, maverick reputation.", aliases:["john mccain","mccain"]},
+  {name:"Mitt Romney", country:"United States", dates:"Senator (UT), 2019–2025", x:3, y:2, blurb:"Establishment moderate Republican.", aliases:["mitt romney","romney"]},
+  {name:"Paul Ryan", country:"United States", dates:"House Speaker, 2015–2019", x:6, y:2, blurb:"Fiscally conservative Republican.", aliases:["paul ryan","ryan"]},
+  {name:"Nikki Haley", country:"United States", dates:"UN Ambassador, 2017–2018", x:5, y:2, blurb:"Establishment conservative Republican.", aliases:["nikki haley","haley"]},
+  {name:"Vivek Ramaswamy", country:"United States", dates:"2024 presidential candidate", x:6, y:0, blurb:"Right-wing entrepreneur-politician.", aliases:["vivek ramaswamy","ramaswamy"]},
+  {name:"Andrew Yang", country:"United States", dates:"2020 presidential candidate", x:-2, y:5, blurb:"Centrist, universal-basic-income focus.", aliases:["andrew yang","yang"]},
+  {name:"Pete Buttigieg", country:"United States", dates:"Transportation Secretary, 2021–2025", x:-3, y:4, blurb:"Center-left Democrat.", aliases:["pete buttigieg","buttigieg"]},
+
+  // --- More Caribbean / Central America / Pacific ---
+  {name:"Mia Mottley", country:"Barbados", dates:"Prime Minister, 2018–present", x:-4, y:3, blurb:"Center-left, climate-finance advocate.", aliases:["mia mottley","mottley"]},
+  {name:"Andrew Holness", country:"Jamaica", dates:"Prime Minister, 2016–present", x:2, y:2, blurb:"Center-right JLP.", aliases:["andrew holness","holness"]},
+  {name:"Keith Rowley", country:"Trinidad and Tobago", dates:"Prime Minister, 2015–2025", x:1, y:2, blurb:"Center-right PNM.", aliases:["keith rowley","rowley"]},
+  {name:"Xiomara Castro", country:"Honduras", dates:"President, 2022–present", x:-6, y:2, blurb:"Left-wing, first female president.", aliases:["xiomara castro","castro honduras"]},
+  {name:"Rodrigo Chaves", country:"Costa Rica", dates:"President, 2022–present", x:3, y:0, blurb:"Populist-technocrat.", aliases:["rodrigo chaves","chaves"]},
+  {name:"José Raúl Mulino", country:"Panama", dates:"President, 2024–present", x:2, y:2, blurb:"Center-right.", aliases:["jose raul mulino","mulino"]},
+  {name:"Bernardo Arévalo", country:"Guatemala", dates:"President, 2024–present", x:-3, y:4, blurb:"Anti-corruption reformist.", aliases:["bernardo arevalo","arevalo"]},
+  {name:"Frank Bainimarama", country:"Fiji", dates:"Prime Minister, 2007–2022", x:0, y:-5, blurb:"Former coup leader turned elected PM.", aliases:["frank bainimarama","bainimarama"]},
+  {name:"James Marape", country:"Papua New Guinea", dates:"Prime Minister, 2019–present", x:0, y:1, blurb:"Centrist, resource-economy focus.", aliases:["james marape","marape"]},
+
+  // --- More global historical figures ---
+  {name:"Otto von Bismarck", country:"Germany", dates:"Chancellor, 1871–1890", x:3, y:-3, blurb:"Conservative unifier, welfare-state pioneer.", aliases:["otto von bismarck","bismarck"]},
+  {name:"Napoleon Bonaparte", country:"France", dates:"1799–1815", x:1, y:-6, blurb:"Military dictator, centralized authoritarian rule.", aliases:["napoleon bonaparte","napoleon"]},
+  {name:"Vladimir Lenin", country:"Soviet Union", dates:"1917–1924", x:-9, y:-8, blurb:"Bolshevik revolutionary, one-party state founder.", aliases:["vladimir lenin","lenin"]},
+  {name:"Leon Trotsky", country:"Soviet Union", dates:"Revolutionary leader", x:-9, y:-4, blurb:"Marxist revolutionary, later exiled and assassinated.", aliases:["leon trotsky","trotsky"]},
+  {name:"Kwame Nkrumah", country:"Ghana", dates:"1957–1966", x:-6, y:-3, blurb:"Pan-Africanist founding leader, later one-party rule.", aliases:["kwame nkrumah","nkrumah"]},
+  {name:"Patrice Lumumba", country:"DR Congo", dates:"1960", blurb:"Independence leader, deposed and killed.", x:-5, y:2, aliases:["patrice lumumba","lumumba"]},
+  {name:"Haile Selassie", country:"Ethiopia", dates:"1930–1974", x:2, y:-6, blurb:"Monarch, deposed by military coup.", aliases:["haile selassie"]},
+  {name:"Sukarno", country:"Indonesia", dates:"1945–1967", x:-4, y:-4, blurb:"Independence founder, later authoritarian \"Guided Democracy.\"", aliases:["sukarno"]},
+  {name:"Suharto", country:"Indonesia", dates:"1967–1998", x:2, y:-8, blurb:"Long military-backed authoritarian rule.", aliases:["suharto"]},
+  {name:"Ferdinand Marcos Sr", country:"Philippines", dates:"1965–1986", x:2, y:-8, blurb:"Martial-law dictatorship, later ousted.", aliases:["ferdinand marcos sr","marcos sr"]},
+  {name:"Corazon Aquino", country:"Philippines", dates:"1986–1992", x:-1, y:5, blurb:"Restored democracy after People Power Revolution.", aliases:["corazon aquino","cory aquino"]},
+  {name:"Park Chung-hee", country:"South Korea", dates:"1961–1979", x:3, y:-7, blurb:"Authoritarian developmental state.", aliases:["park chung-hee","park chung hee"]},
+  {name:"Chiang Kai-shek", country:"Taiwan/China", dates:"1928–1975", x:4, y:-8, blurb:"Nationalist authoritarian leader.", aliases:["chiang kai-shek","chiang kai shek"]},
+  {name:"Getúlio Vargas", country:"Brazil", dates:"1930–1945, 1951–1954", x:-3, y:-4, blurb:"Populist-authoritarian corporatist rule.", aliases:["getulio vargas","vargas"]},
+  {name:"Juan Perón", country:"Argentina", dates:"1946–1955, 1973–1974", x:-2, y:-4, blurb:"Populist corporatist, foundational Peronism.", aliases:["juan peron","peron"]},
+  {name:"Eva Perón", country:"Argentina", dates:"First Lady, 1946–1952", x:-3, y:-1, blurb:"Populist icon, social-welfare advocate.", aliases:["eva peron","evita"]},
+  {name:"Salvador Allende", country:"Chile", dates:"1970–1973", x:-8, y:3, blurb:"Democratic socialist, overthrown by coup.", aliases:["salvador allende","allende"]},
+  {name:"Lech Wałęsa", country:"Poland", dates:"1990–1995", x:1, y:4, blurb:"Solidarity movement leader, transitioned to democracy.", aliases:["lech walesa","walesa"]},
+  {name:"Václav Havel", country:"Czech Republic", dates:"1993–2003", x:-2, y:6, blurb:"Dissident playwright, strong civil-liberties record.", aliases:["vaclav havel","havel"]},
+
+  // --- More UAE/Gulf/Africa small states ---
+  {name:"Sheikh Khalifa bin Zayed", country:"UAE", dates:"President, 2004–2022", x:5, y:-6, blurb:"Absolute rule, market economy.", aliases:["khalifa bin zayed"]},
+  {name:"Sheikh Sabah Al-Ahmad Al-Jaber Al-Sabah", country:"Kuwait", dates:"Emir, 2006–2020", x:4, y:-3, blurb:"Constitutional monarchy with elected parliament.", aliases:["sheikh sabah","sabah kuwait"]},
+  {name:"Hamad bin Isa Al Khalifa", country:"Bahrain", dates:"King, 2002–present", x:5, y:-6, blurb:"Absolute monarchy, limited pluralism.", aliases:["hamad bin isa","king of bahrain"]},
+  {name:"Qaboos bin Said", country:"Oman", dates:"Sultan, 1970–2020", x:3, y:-4, blurb:"Modernizing absolute monarch.", aliases:["qaboos bin said","qaboos"]},
+
+  // --- More Nordic/Baltic ---
+  {name:"Kristrún Frostadóttir", country:"Iceland", dates:"Prime Minister, 2024–present", x:-4, y:4, blurb:"Center-left Social Democrat.", aliases:["kristrun frostadottir","frostadottir"]},
+  {name:"Kaja Kallas", country:"Estonia", dates:"Prime Minister, 2021–2024", x:3, y:3, blurb:"Center-right liberal, hawkish on Russia.", aliases:["kaja kallas","kallas"]},
+  {name:"Ingrida Šimonytė", country:"Lithuania", dates:"Prime Minister, 2020–2024", x:3, y:3, blurb:"Center-right liberal-conservative.", aliases:["ingrida simonyte","simonyte"]},
+  {name:"Krišjānis Kariņš", country:"Latvia", dates:"Prime Minister, 2019–2023", x:2, y:3, blurb:"Center-right liberal.", aliases:["krisjanis karins","karins"]},
+
+  // --- More South Asia ---
+  {name:"Zulfikar Ali Bhutto", country:"Pakistan", dates:"1971–1977", x:-4, y:-3, blurb:"Populist democratic-socialist, later executed.", aliases:["zulfikar ali bhutto","zulfikar bhutto"]},
+  {name:"Benazir Bhutto", country:"Pakistan", dates:"1988–1990, 1993–1996", x:-3, y:1, blurb:"Center-left, first female PM of a Muslim-majority nation.", aliases:["benazir bhutto","benazir"]},
+  {name:"Shehbaz Sharif", country:"Pakistan", dates:"Prime Minister, 2022–present", x:2, y:0, blurb:"Center-right, business-friendly.", aliases:["shehbaz sharif","shehbaz"]},
+  {name:"Nawaz Sharif", country:"Pakistan", dates:"1990–1993, 1997–1999, 2013–2017", x:3, y:-1, blurb:"Center-right, market-friendly.", aliases:["nawaz sharif","nawaz"]},
+  {name:"Ranil Wickremesinghe", country:"Sri Lanka", dates:"President, 2022–2024", x:2, y:1, blurb:"Center-right, crisis-era leadership.", aliases:["ranil wickremesinghe","wickremesinghe"]},
+  {name:"Anura Kumara Dissanayake", country:"Sri Lanka", dates:"President, 2024–present", x:-6, y:2, blurb:"Left-wing, anti-corruption platform.", aliases:["anura kumara dissanayake","dissanayake"]},
+
+  // --- More cabinet-level/opposition Europe ---
+  {name:"Sahra Wagenknecht", country:"Germany", dates:"BSW party leader", x:-5, y:-3, blurb:"Left-populist, socially conservative positions.", aliases:["sahra wagenknecht","wagenknecht"]},
+  {name:"Alice Weidel", country:"Germany", dates:"AfD co-leader", x:7, y:-4, blurb:"Right-wing nationalist AfD.", aliases:["alice weidel","weidel"]},
+  {name:"Robert Habeck", country:"Germany", dates:"Vice Chancellor, 2021–2025", x:-4, y:4, blurb:"Green Party, climate-policy focus.", aliases:["robert habeck","habeck"]},
+  {name:"Christian Lindner", country:"Germany", dates:"Finance Minister, 2021–2024", x:4, y:3, blurb:"Free-market liberal FDP.", aliases:["christian lindner","lindner"]},
+
+  // --- More African leaders ---
+  {name:"Nelson Chamisa", country:"Zimbabwe", dates:"Opposition leader (CCC)", x:-2, y:4, blurb:"Opposition figure challenging ZANU-PF.", aliases:["nelson chamisa","chamisa"]},
+  {name:"Raila Odinga", country:"Kenya", dates:"Longtime opposition leader", x:-3, y:2, blurb:"Center-left, repeated presidential candidate.", aliases:["raila odinga","odinga"]},
+  {name:"Atiku Abubakar", country:"Nigeria", dates:"Former VP, opposition figure", x:2, y:1, blurb:"Center-right, business background.", aliases:["atiku abubakar","atiku"]},
+  {name:"Peter Obi", country:"Nigeria", dates:"2023 presidential candidate", x:-2, y:3, blurb:"Reformist, anti-establishment appeal.", aliases:["peter obi","obi"]},
+
+  // --- More Middle East ---
+  {name:"Ebrahim Raisi", country:"Iran", dates:"President, 2021–2024", x:-2, y:-8, blurb:"Hardline conservative cleric.", aliases:["ebrahim raisi","raisi"]},
+  {name:"Masoud Pezeshkian", country:"Iran", dates:"President, 2024–present", x:1, y:-6, blurb:"Relatively moderate reformist within theocratic system.", aliases:["masoud pezeshkian","pezeshkian"]},
+  {name:"Ahmed al-Sharaa", country:"Syria", dates:"Transitional leader, 2024–present", x:1, y:-5, blurb:"Former rebel commander, now transitional president.", aliases:["ahmed al-sharaa","al-sharaa","al-jolani"]},
+
+  // --- More US historical ---
+  {name:"Lyndon B. Johnson", country:"United States", dates:"1963–1969", x:-4, y:2, blurb:"Great Society reforms, Civil Rights Act.", aliases:["lyndon johnson","lbj"]},
+  {name:"Dwight D. Eisenhower", country:"United States", dates:"1953–1961", x:3, y:2, blurb:"Moderate Republican, interstate highway system.", aliases:["dwight eisenhower","eisenhower"]},
+  {name:"Harry Truman", country:"United States", dates:"1945–1953", x:-3, y:2, blurb:"Democrat, Cold War containment policy.", aliases:["harry truman","truman"]},
+  {name:"Woodrow Wilson", country:"United States", dates:"1913–1921", x:-2, y:0, blurb:"Progressive-era Democrat, WWI leadership.", aliases:["woodrow wilson","wilson us"]},
+  {name:"Theodore Roosevelt", country:"United States", dates:"1901–1909", x:1, y:2, blurb:"Progressive Republican, trust-busting reforms.", aliases:["theodore roosevelt","teddy roosevelt"]},
+  {name:"Andrew Jackson", country:"United States", dates:"1829–1837", x:-1, y:-5, blurb:"Populist Democrat, expanded executive power controversially.", aliases:["andrew jackson","jackson us"]},
+  {name:"Thomas Jefferson", country:"United States", dates:"1801–1809", x:-2, y:3, blurb:"Founding father, limited-government Democratic-Republican.", aliases:["thomas jefferson","jefferson"]},
+  {name:"George Washington", country:"United States", dates:"1789–1797", x:1, y:2, blurb:"Founding president, set precedent for peaceful transfer of power.", aliases:["george washington","washington us"]},
+
+  // --- More UK party figures ---
+  {name:"Nick Clegg", country:"United Kingdom", dates:"Deputy PM, 2010–2015", x:-1, y:4, blurb:"Centrist Liberal Democrat.", aliases:["nick clegg","clegg"]},
+  {name:"Tim Farron", country:"United Kingdom", dates:"Lib Dem leader, 2015–2017", x:-2, y:4, blurb:"Centrist liberal.", aliases:["tim farron","farron"]},
+  {name:"Alex Salmond", country:"United Kingdom", dates:"Scottish First Minister, 2007–2014", x:-3, y:1, blurb:"Center-left SNP, Scottish independence campaigner.", aliases:["alex salmond","salmond"]},
+  {name:"Ruth Davidson", country:"United Kingdom", dates:"Scottish Conservative leader", x:4, y:2, blurb:"Center-right, pro-Union Conservative.", aliases:["ruth davidson","davidson"]},
+  {name:"Arlene Foster", country:"United Kingdom", dates:"NI First Minister, 2016–2021", x:5, y:-2, blurb:"DUP, socially conservative unionist.", aliases:["arlene foster","foster"]},
+  {name:"Michelle O'Neill", country:"United Kingdom", dates:"NI First Minister, 2024–present", x:-4, y:2, blurb:"Sinn Féin, Irish reunification focus.", aliases:["michelle o'neill","oneill"]}
 ];
