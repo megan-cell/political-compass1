@@ -138,5 +138,175 @@ const MEDIA_OUTLETS = [
   {name:"El Mercurio", country:"Chile", x:4, y:1, blurb:"Center-right, historically influential.", aliases:["el mercurio"]},
   {name:"La Tercera", country:"Chile", x:1, y:3, blurb:"Centrist daily.", aliases:["la tercera"]},
   {name:"teleSUR", country:"Venezuela", x:-6, y:-6, blurb:"State-funded pan-Latin American broadcaster, propaganda concerns.", aliases:["telesur"]},
-  {name:"Univision", country:"United States", x:-1, y:3, blurb:"Leading US Spanish-language broadcaster.", aliases:["univision"]}
+  {name:"Univision", country:"United States", x:-1, y:3, blurb:"Leading US Spanish-language broadcaster.", aliases:["univision"]},
+
+  // --- More US ---
+  {name:"Los Angeles Times", country:"United States", x:-3, y:4, blurb:"Major regional paper, center-left leaning.", aliases:["la times","los angeles times"]},
+  {name:"Chicago Tribune", country:"United States", x:1, y:3, blurb:"Major regional paper, historically center-right.", aliases:["chicago tribune"]},
+  {name:"The Boston Globe", country:"United States", x:-3, y:4, blurb:"Major regional paper, center-left leaning.", aliases:["boston globe"]},
+  {name:"Miami Herald", country:"United States", x:-1, y:3, blurb:"Major regional paper, centrist.", aliases:["miami herald"]},
+  {name:"San Francisco Chronicle", country:"United States", x:-3, y:3, blurb:"Major regional paper, left-leaning.", aliases:["sf chronicle","san francisco chronicle"]},
+  {name:"The Dallas Morning News", country:"United States", x:2, y:3, blurb:"Major regional paper, center-right.", aliases:["dallas morning news"]},
+  {name:"Houston Chronicle", country:"United States", x:0, y:3, blurb:"Major regional paper, centrist.", aliases:["houston chronicle"]},
+  {name:"Axios", country:"United States", x:-1, y:4, blurb:"Digital news, concise factual format.", aliases:["axios"]},
+  {name:"The Intercept", country:"United States", x:-7, y:2, blurb:"Investigative, strongly left-leaning.", aliases:["the intercept","intercept"]},
+  {name:"ProPublica", country:"United States", x:-2, y:6, blurb:"Nonprofit investigative journalism, high standards.", aliases:["propublica"]},
+  {name:"Mother Jones", country:"United States", x:-7, y:1, blurb:"Left-leaning investigative magazine.", aliases:["mother jones"]},
+  {name:"Reason", country:"United States", x:5, y:6, blurb:"Libertarian magazine.", aliases:["reason","reason magazine"]},
+  {name:"The American Conservative", country:"United States", x:6, y:1, blurb:"Paleoconservative commentary.", aliases:["american conservative"]},
+  {name:"Slate", country:"United States", x:-5, y:1, blurb:"Left-leaning digital commentary.", aliases:["slate"]},
+  {name:"Salon", country:"United States", x:-6, y:0, blurb:"Left-leaning digital commentary.", aliases:["salon"]},
+  {name:"The New Republic", country:"United States", x:-5, y:2, blurb:"Left-leaning political commentary.", aliases:["new republic","the new republic"]},
+  {name:"Time", country:"United States", x:-1, y:3, blurb:"General-interest newsmagazine, mild left lean.", aliases:["time magazine","time"]},
+  {name:"Newsweek", country:"United States", x:-1, y:1, blurb:"General-interest newsmagazine.", aliases:["newsweek"]},
+  {name:"Forbes", country:"United States", x:2, y:3, blurb:"Business-focused, center-right lean.", aliases:["forbes"]},
+  {name:"The Daily Beast", country:"United States", x:-5, y:0, blurb:"Left-leaning digital tabloid.", aliases:["daily beast","the daily beast"]},
+  {name:"The Blaze", country:"United States", x:8, y:-4, blurb:"Conservative commentary outlet.", aliases:["the blaze","blaze media"]},
+  {name:"RedState", country:"United States", x:7, y:-3, blurb:"Conservative opinion outlet.", aliases:["redstate"]},
+  {name:"Daily Kos", country:"United States", x:-7, y:0, blurb:"Left-leaning political blog/community.", aliases:["daily kos","dailykos"]},
+  {name:"Talking Points Memo", country:"United States", x:-5, y:2, blurb:"Left-leaning political news site.", aliases:["talking points memo","tpm"]},
+  {name:"The Nation", country:"United States", x:-8, y:2, blurb:"Left-wing political commentary magazine.", aliases:["the nation"]},
+  {name:"The Drudge Report", country:"United States", x:3, y:-2, blurb:"Aggregator, historically right-leaning framing.", aliases:["drudge report","drudge"]},
+  {name:"Semafor", country:"United States", x:0, y:4, blurb:"Newer digital outlet, centrist framing.", aliases:["semafor"]},
+  {name:"The Free Press", country:"United States", x:2, y:2, blurb:"Heterodox commentary, anti-cancel-culture framing.", aliases:["the free press","bari weiss"]},
+
+  // --- More UK ---
+  {name:"The Scotsman", country:"United Kingdom", x:0, y:3, blurb:"Scottish national paper, centrist.", aliases:["the scotsman","scotsman"]},
+  {name:"The Herald (Scotland)", country:"United Kingdom", x:-2, y:3, blurb:"Scottish paper, center-left.", aliases:["the herald scotland","herald scotland"]},
+  {name:"Belfast Telegraph", country:"United Kingdom", x:0, y:3, blurb:"Northern Ireland's largest paper.", aliases:["belfast telegraph"]},
+  {name:"Evening Standard", country:"United Kingdom", x:1, y:2, blurb:"London evening paper, centrist.", aliases:["evening standard"]},
+  {name:"City AM", country:"United Kingdom", x:3, y:3, blurb:"Business-focused free paper, center-right.", aliases:["city am","cityam"]},
+  {name:"Private Eye", country:"United Kingdom", x:-1, y:4, blurb:"Satirical/investigative fortnightly.", aliases:["private eye"]},
+  {name:"New Statesman", country:"United Kingdom", x:-5, y:4, blurb:"Center-left political weekly.", aliases:["new statesman"]},
+  {name:"The Spectator", country:"United Kingdom", x:6, y:2, blurb:"Center-right political weekly.", aliases:["the spectator","spectator"]},
+  {name:"Prospect", country:"United Kingdom", x:-2, y:4, blurb:"Centrist ideas/current-affairs magazine.", aliases:["prospect magazine","prospect"]},
+  {name:"PinkNews", country:"United Kingdom", x:-4, y:2, blurb:"LGBTQ-focused news outlet.", aliases:["pinknews","pink news"]},
+
+  // --- Asia ---
+  {name:"Hindustan Times", country:"India", x:0, y:3, blurb:"Major English-language daily, centrist.", aliases:["hindustan times"]},
+  {name:"The Hindu", country:"India", x:-2, y:4, blurb:"Center-left, high editorial standards.", aliases:["the hindu"]},
+  {name:"NDTV", country:"India", x:-1, y:2, blurb:"Broadcast news, relatively centrist.", aliases:["ndtv"]},
+  {name:"Republic TV", country:"India", x:4, y:-4, blurb:"Nationalist, highly sensationalist broadcaster.", aliases:["republic tv"]},
+  {name:"Zee News", country:"India", x:4, y:-3, blurb:"Nationalist-leaning broadcaster.", aliases:["zee news"]},
+  {name:"China Daily", country:"China", x:-3, y:-8, blurb:"State-run English-language outlet.", aliases:["china daily"]},
+  {name:"People's Daily", country:"China", x:-4, y:-9, blurb:"Official Communist Party newspaper.", aliases:["people's daily","peoples daily"]},
+  {name:"CCTV", country:"China", x:-4, y:-9, blurb:"State broadcaster.", aliases:["cctv china"]},
+  {name:"Asahi Shimbun", country:"Japan", x:-2, y:5, blurb:"Center-left major daily.", aliases:["asahi shimbun","asahi"]},
+  {name:"Yomiuri Shimbun", country:"Japan", x:2, y:5, blurb:"Center-right, world's largest circulation daily.", aliases:["yomiuri shimbun","yomiuri"]},
+  {name:"Mainichi Shimbun", country:"Japan", x:-1, y:4, blurb:"Centrist major daily.", aliases:["mainichi shimbun","mainichi"]},
+  {name:"NHK", country:"Japan", x:0, y:5, blurb:"Public broadcaster, mandated impartiality.", aliases:["nhk"]},
+  {name:"Chosun Ilbo", country:"South Korea", x:3, y:3, blurb:"Center-right major daily.", aliases:["chosun ilbo"]},
+  {name:"JoongAng Ilbo", country:"South Korea", x:2, y:3, blurb:"Center-right major daily.", aliases:["joongang ilbo"]},
+  {name:"Yonhap", country:"South Korea", x:0, y:5, blurb:"Wire service, minimal editorializing.", aliases:["yonhap"]},
+  {name:"The Straits Times", country:"Singapore", x:2, y:3, blurb:"State-linked, generally supportive of government.", aliases:["straits times"]},
+  {name:"South China Morning Post", country:"Hong Kong", x:0, y:2, blurb:"English-language paper, increasingly cautious post-2020.", aliases:["scmp","south china morning post"]},
+
+  // --- Middle East ---
+  {name:"Haaretz", country:"Israel", x:-4, y:4, blurb:"Left-leaning, critical investigative journalism.", aliases:["haaretz"]},
+  {name:"The Jerusalem Post", country:"Israel", x:3, y:3, blurb:"Center-right English-language paper.", aliases:["jerusalem post"]},
+  {name:"The Times of Israel", country:"Israel", x:1, y:4, blurb:"Centrist English-language outlet.", aliases:["times of israel"]},
+  {name:"Asharq Al-Awsat", country:"Saudi Arabia", x:3, y:2, blurb:"Pan-Arab paper, Saudi-owned.", aliases:["asharq al-awsat"]},
+  {name:"Al Arabiya", country:"Saudi Arabia", x:3, y:1, blurb:"Pan-Arab broadcaster, Saudi-aligned.", aliases:["al arabiya"]},
+  {name:"Daily Sabah", country:"Turkey", x:4, y:-4, blurb:"Pro-government English-language outlet.", aliases:["daily sabah"]},
+  {name:"Hürriyet", country:"Turkey", x:2, y:0, blurb:"Major secular-leaning daily.", aliases:["hurriyet","hürriyet"]},
+
+  // --- Africa ---
+  {name:"Daily Nation", country:"Kenya", x:0, y:3, blurb:"Leading Kenyan daily, centrist.", aliases:["daily nation","nation kenya"]},
+  {name:"This Day", country:"Nigeria", x:1, y:2, blurb:"Major Nigerian daily.", aliases:["this day nigeria","thisday"]},
+  {name:"Punch", country:"Nigeria", x:0, y:2, blurb:"Leading Nigerian daily.", aliases:["punch nigeria"]},
+  {name:"Mail & Guardian", country:"South Africa", x:-3, y:4, blurb:"Investigative, center-left.", aliases:["mail and guardian","mail & guardian"]},
+  {name:"News24", country:"South Africa", x:-1, y:3, blurb:"Leading digital news outlet.", aliases:["news24"]},
+
+  // --- More Latin America ---
+  {name:"Excélsior", country:"Mexico", x:1, y:2, blurb:"Historic major Mexican daily.", aliases:["excelsior"]},
+  {name:"El Espectador", country:"Colombia", x:-2, y:4, blurb:"Center-left, investigative daily.", aliases:["el espectador"]},
+
+  // --- More Europe ---
+  {name:"La Stampa", country:"Italy", x:-1, y:4, blurb:"Center-left major daily.", aliases:["la stampa"]},
+  {name:"Neue Zürcher Zeitung", country:"Switzerland", x:3, y:5, blurb:"Center-right, high-standards Swiss paper.", aliases:["nzz","neue zurcher zeitung"]},
+  {name:"Le Soir", country:"Belgium", x:-2, y:3, blurb:"Center-left Belgian paper.", aliases:["le soir"]},
+  {name:"De Standaard", country:"Belgium", x:1, y:4, blurb:"Center-right Flemish paper.", aliases:["de standaard"]},
+  {name:"The Irish Times", country:"Ireland", x:-1, y:5, blurb:"Center-left paper of record.", aliases:["irish times"]},
+  {name:"Irish Independent", country:"Ireland", x:1, y:3, blurb:"Center-right major daily.", aliases:["irish independent"]},
+
+  // --- More Oceania ---
+  {name:"Sydney Morning Herald", country:"Australia", x:-2, y:4, blurb:"Center-left major daily.", aliases:["sydney morning herald","smh"]},
+  {name:"The Australian", country:"Australia", x:5, y:3, blurb:"Center-right national paper.", aliases:["the australian"]},
+  {name:"News.com.au", country:"Australia", x:2, y:0, blurb:"Popular digital tabloid-style outlet.", aliases:["news.com.au"]},
+  {name:"New Zealand Herald", country:"New Zealand", x:0, y:3, blurb:"Leading NZ daily, centrist.", aliases:["nz herald","new zealand herald"]},
+  {name:"Stuff", country:"New Zealand", x:-1, y:3, blurb:"Major NZ digital/print outlet.", aliases:["stuff nz","stuff.co.nz"]},
+
+  // --- More Canada ---
+  {name:"The Globe and Mail", country:"Canada", x:1, y:4, blurb:"Center-right paper of record.", aliases:["globe and mail"]},
+  {name:"Toronto Star", country:"Canada", x:-3, y:4, blurb:"Center-left major daily.", aliases:["toronto star"]},
+  {name:"National Post", country:"Canada", x:4, y:3, blurb:"Center-right national paper.", aliases:["national post"]},
+  {name:"Global News", country:"Canada", x:0, y:3, blurb:"Commercial broadcast news, centrist.", aliases:["global news canada"]},
+
+  // --- More Nordic ---
+  {name:"Dagsavisen", country:"Norway", x:-4, y:3, blurb:"Left-leaning Norwegian daily.", aliases:["dagsavisen"]},
+  {name:"E24", country:"Norway", x:2, y:4, blurb:"Norwegian business/finance outlet.", aliases:["e24"]},
+  {name:"iTromsø", country:"Norway", x:0, y:3, blurb:"Regional Northern Norway paper.", aliases:["itromso","itromsø"]},
+  {name:"Bergens Tidende", country:"Norway", x:0, y:4, blurb:"Major regional Bergen paper.", aliases:["bergens tidende","bt"]},
+  {name:"Adresseavisen", country:"Norway", x:1, y:4, blurb:"Major Trondheim regional paper.", aliases:["adresseavisen"]},
+  {name:"Stavanger Aftenblad", country:"Norway", x:1, y:4, blurb:"Major Stavanger regional paper.", aliases:["stavanger aftenblad"]},
+  {name:"Sveriges Television", country:"Sweden", x:-1, y:5, blurb:"Swedish public broadcaster.", aliases:["svt","sveriges television"]},
+  {name:"Sveriges Radio", country:"Sweden", x:-1, y:5, blurb:"Swedish public radio.", aliases:["sveriges radio","sr sweden"]},
+  {name:"DR (Danmarks Radio)", country:"Denmark", x:-1, y:5, blurb:"Danish public broadcaster.", aliases:["dr denmark","danmarks radio"]},
+  {name:"Yle", country:"Finland", x:-1, y:5, blurb:"Finnish public broadcaster.", aliases:["yle"]},
+  {name:"Iltalehti", country:"Finland", x:1, y:0, blurb:"Finnish tabloid.", aliases:["iltalehti"]},
+
+  // --- More Eastern Europe / Baltics ---
+  {name:"Delfi", country:"Lithuania", x:0, y:2, blurb:"Leading Baltic digital news portal.", aliases:["delfi"]},
+  {name:"Postimees", country:"Estonia", x:1, y:3, blurb:"Leading Estonian daily.", aliases:["postimees"]},
+  {name:"Onet", country:"Poland", x:-1, y:2, blurb:"Major Polish news portal.", aliases:["onet"]},
+  {name:"Interia", country:"Poland", x:0, y:2, blurb:"Major Polish news portal.", aliases:["interia"]},
+  {name:"HotNews.ro", country:"Romania", x:-1, y:3, blurb:"Independent Romanian digital outlet.", aliases:["hotnews","hotnews.ro"]},
+  {name:"iROZHLAS", country:"Czech Republic", x:-1, y:4, blurb:"Czech public radio's digital news.", aliases:["irozhlas"]},
+  {name:"Denník N", country:"Slovakia", x:-2, y:4, blurb:"Independent Slovak daily, critical of Fico government.", aliases:["dennik n","denník n"]},
+  {name:"Nova Makedonija", country:"North Macedonia", x:0, y:2, blurb:"State-linked Macedonian daily.", aliases:["nova makedonija"]},
+  {name:"B92", country:"Serbia", x:-2, y:2, blurb:"Independent-leaning Serbian outlet.", aliases:["b92"]},
+  {name:"RTS (Radio Television of Serbia)", country:"Serbia", x:2, y:-3, blurb:"State broadcaster, government-aligned.", aliases:["rts serbia"]},
+
+  // --- More Latin America ---
+  {name:"ABC Color", country:"Paraguay", x:3, y:2, blurb:"Leading center-right Paraguayan daily.", aliases:["abc color"]},
+  {name:"El Nacional", country:"Venezuela", x:4, y:1, blurb:"Opposition-aligned Venezuelan paper, faced state pressure.", aliases:["el nacional"]},
+  {name:"El País (Uruguay)", country:"Uruguay", x:3, y:3, blurb:"Center-right leading Uruguayan daily.", aliases:["el pais uruguay"]},
+  {name:"La Diaria", country:"Uruguay", x:-4, y:3, blurb:"Left-leaning Uruguayan daily.", aliases:["la diaria"]},
+  {name:"La Prensa (Nicaragua)", country:"Nicaragua", x:2, y:2, blurb:"Opposition-aligned, faced Ortega-government crackdown.", aliases:["la prensa nicaragua"]},
+
+  // --- More international wire/pan-regional ---
+  {name:"Deutsche Presse-Agentur", country:"Germany", x:0, y:6, blurb:"German wire service, minimal editorializing.", aliases:["dpa"]},
+  {name:"Agence France-Presse", country:"France", x:0, y:6, blurb:"French wire service, minimal editorializing.", aliases:["afp","agence france-presse"]},
+  {name:"EFE", country:"Spain", x:0, y:5, blurb:"Spanish-language wire service.", aliases:["efe"]},
+  {name:"ANSA", country:"Italy", x:0, y:5, blurb:"Italian wire service.", aliases:["ansa"]},
+  {name:"Anadolu Agency", country:"Turkey", x:3, y:-3, blurb:"Turkish state-run wire service.", aliases:["anadolu agency","anadolu"]},
+
+  // --- More Southeast/South Asia ---
+  {name:"The Jakarta Post", country:"Indonesia", x:0, y:3, blurb:"English-language Indonesian daily, centrist.", aliases:["jakarta post"]},
+  {name:"Kompas", country:"Indonesia", x:0, y:3, blurb:"Leading Indonesian-language daily.", aliases:["kompas"]},
+  {name:"Bangkok Post", country:"Thailand", x:1, y:3, blurb:"English-language Thai daily, centrist.", aliases:["bangkok post"]},
+  {name:"Rappler", country:"Philippines", x:-3, y:4, blurb:"Independent digital outlet, faced government pressure.", aliases:["rappler"]},
+  {name:"Philippine Daily Inquirer", country:"Philippines", x:-1, y:3, blurb:"Leading Philippine daily.", aliases:["inquirer","philippine daily inquirer"]},
+  {name:"Dawn", country:"Pakistan", x:-1, y:4, blurb:"Leading English-language Pakistani daily.", aliases:["dawn newspaper","dawn"]},
+  {name:"The Express Tribune", country:"Pakistan", x:1, y:2, blurb:"English-language Pakistani daily.", aliases:["express tribune"]},
+  {name:"Prothom Alo", country:"Bangladesh", x:-1, y:3, blurb:"Leading Bengali-language daily.", aliases:["prothom alo"]},
+  {name:"The Daily Star (Bangladesh)", country:"Bangladesh", x:0, y:3, blurb:"Leading English-language Bangladeshi daily.", aliases:["daily star bangladesh"]},
+
+  // --- More Africa ---
+  {name:"Al-Ahram", country:"Egypt", x:2, y:-4, blurb:"State-linked leading Egyptian daily.", aliases:["al-ahram","al ahram"]},
+  {name:"Daily Trust", country:"Nigeria", x:1, y:2, blurb:"Major Nigerian daily.", aliases:["daily trust"]},
+  {name:"The East African", country:"Kenya", x:-1, y:3, blurb:"Regional East Africa weekly.", aliases:["east african"]},
+  {name:"Ethiopian Herald", country:"Ethiopia", x:-1, y:-3, blurb:"State-linked English-language daily.", aliases:["ethiopian herald"]},
+  {name:"Zimbabwe Independent", country:"Zimbabwe", x:1, y:2, blurb:"Independent weekly, critical of government.", aliases:["zimbabwe independent"]},
+
+  // --- More US niche/local ---
+  {name:"The Texas Tribune", country:"United States", x:-1, y:5, blurb:"Nonprofit Texas-focused outlet, high standards.", aliases:["texas tribune"]},
+  {name:"CalMatters", country:"United States", x:-1, y:5, blurb:"Nonprofit California-focused outlet.", aliases:["calmatters"]},
+  {name:"The 19th", country:"United States", x:-4, y:4, blurb:"Nonprofit outlet focused on gender/politics.", aliases:["the 19th","19th news"]},
+  {name:"Grist", country:"United States", x:-4, y:4, blurb:"Environmental-focused nonprofit outlet.", aliases:["grist"]},
+  {name:"The Marshall Project", country:"United States", x:-3, y:5, blurb:"Nonprofit criminal-justice-focused outlet.", aliases:["marshall project"]},
+  {name:"Democracy Now!", country:"United States", x:-8, y:2, blurb:"Independent left-leaning broadcast outlet.", aliases:["democracy now"]},
+  {name:"Jacobin", country:"United States", x:-9, y:2, blurb:"Democratic-socialist magazine.", aliases:["jacobin"]},
+  {name:"Christian Broadcasting Network", country:"United States", x:6, y:0, blurb:"Evangelical Christian broadcaster.", aliases:["cbn","christian broadcasting network"]},
+  {name:"Al Jazeera English", country:"Qatar", x:-2, y:3, blurb:"English-language arm, generally regarded as more independent than Arabic service.", aliases:["al jazeera english","aje"]}
 ];
