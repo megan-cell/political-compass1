@@ -144,6 +144,16 @@ function colorFor(country){
   for(let i=0;i<country.length;i++) h = (h*31 + country.charCodeAt(i)) >>> 0;
   return PALETTE[h % PALETTE.length];
 }
+function shadeColor(hex, percent){
+  const num = parseInt(hex.slice(1), 16);
+  let r = (num >> 16) + Math.round(255 * percent / 100);
+  let g = ((num >> 8) & 0x00FF) + Math.round(255 * percent / 100);
+  let b = (num & 0x0000FF) + Math.round(255 * percent / 100);
+  r = Math.max(0, Math.min(255, r));
+  g = Math.max(0, Math.min(255, g));
+  b = Math.max(0, Math.min(255, b));
+  return '#' + (0x1000000 + r*0x10000 + g*0x100 + b).toString(16).slice(1);
+}
 
 const svg = document.getElementById('chart');
 const cx = 320, cy = 320, scale = 25.5;
@@ -208,12 +218,13 @@ function renderPoints(){
     const color = colorFor(e.country || 'Unknown');
     const circle = document.createElementNS(ns,'circle');
     circle.setAttribute('cx',x);circle.setAttribute('cy',y);circle.setAttribute('r',11);
-    circle.setAttribute('fill',color);circle.setAttribute('stroke','#0F1520');circle.setAttribute('stroke-width',1.5);
+    const border = currentMode === 'media' ? shadeColor(color, -30) : '#0F1520';
+    circle.setAttribute('fill',color);circle.setAttribute('stroke',border);circle.setAttribute('stroke-width',1.5);
     if(e.flags && e.flags.length){
       const ring = document.createElementNS(ns,'circle');
       ring.setAttribute('cx',x);ring.setAttribute('cy',y);ring.setAttribute('r',14.5);
       ring.setAttribute('fill','none');
-      ring.setAttribute('stroke', e.flags.includes('warcrimes') ? '#C0392B' : '#8E5FD9');
+      ring.setAttribute('stroke', e.flags.includes('warcrimes') ? '#C0392B' : (e.flags.includes('corruption') ? '#8E5FD9' : '#2E9E6B'));
       ring.setAttribute('stroke-width',2.5);
       if(e.flags.length > 1){ ring.setAttribute('stroke-dasharray','4 3'); }
       g.appendChild(ring);
@@ -288,7 +299,10 @@ function renderList(){
         <div class="entry-name">${i+1}. ${escapeHtml(e.name)}</div>
         <div class="entry-meta">${escapeHtml(e.country||'')} · ${escapeHtml(e.dates||'')}</div>
         <div class="entry-blurb">${escapeHtml(e.blurb||'')}</div>
-        ${e.flags && e.flags.length ? `<div style="margin-top:4px;">${e.flags.map(f=>`<span style="font-size:10px;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:2px;margin-right:4px;color:#fff;background:${f==='warcrimes'?'#C0392B':'#8E5FD9'}">${f==='warcrimes'?'WAR CRIMES':'CORRUPTION'}</span>`).join('')}</div>` : ''}
+        ${e.flags && e.flags.length ? `<div style="margin-top:4px;">${e.flags.map(f=>{
+          const cfg = f==='warcrimes' ? {c:'#C0392B',l:'WAR CRIMES'} : f==='corruption' ? {c:'#8E5FD9',l:'CORRUPTION'} : {c:'#2E9E6B',l:'STATE MEDIA'};
+          return `<span style="font-size:10px;font-family:'JetBrains Mono',monospace;padding:2px 6px;border-radius:2px;margin-right:4px;color:#fff;background:${cfg.c}">${cfg.l}</span>`;
+        }).join('')}</div>` : ''}
       </div>
       <button class="entry-remove" data-i="${i}" aria-label="Remove">&times;</button>
     `;
@@ -491,6 +505,11 @@ function updateBearing(){
     legend.innerHTML = `
       <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;border:2.5px solid #C0392B;vertical-align:middle;margin-right:5px;"></span>War crimes / crimes against humanity — tribunal indictment/conviction (ICC, ICTY, Nuremberg, etc.) or extensively documented historical atrocities pre-dating such tribunals</span>
       <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;border:2.5px solid #8E5FD9;vertical-align:middle;margin-right:5px;"></span>Corruption — court conviction</span>
+    `;
+    legend.style.display = 'flex';
+  } else if(currentMode === 'media'){
+    legend.innerHTML = `
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;border:2.5px solid #2E9E6B;vertical-align:middle;margin-right:5px;"></span>State-controlled / state propaganda outlet — not an editorially independent public broadcaster</span>
     `;
     legend.style.display = 'flex';
   } else {
