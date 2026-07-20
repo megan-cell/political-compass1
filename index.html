@@ -98,6 +98,13 @@
         <button id="manualPlaceBtn">Click chart to place manually</button>
       </div>
 
+      <h2>Add by country</h2>
+      <div class="add-row">
+        <input type="text" id="countryInput" placeholder="e.g. United Kingdom, USA, France" autocomplete="off" />
+        <button class="primary" id="countryAddBtn">Add all</button>
+      </div>
+      <div class="error" id="countryErrorBox"></div>
+
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <h2 style="font-size:15px;">Plotted (<span id="countLabel">0</span>)</h2>
         <button class="clear-all" id="clearAllBtn">Clear all</button>
@@ -383,6 +390,62 @@ function addEntry(p){
   save();
 }
 
+const COUNTRY_ALIASES = {
+  'uk':'united kingdom', 'britain':'united kingdom', 'england':'united kingdom', 'gb':'united kingdom',
+  'us':'united states', 'usa':'united states', 'america':'united states',
+  'uae':'united arab emirates',
+  'south korea':'south korea', 'skorea':'south korea',
+  'drc':'dr congo', 'congo':'dr congo',
+  'burma':'myanmar/burma', 'myanmar':'myanmar/burma',
+  'swaziland':'eswatini/swaziland', 'eswatini':'eswatini/swaziland'
+};
+
+function addAllFromCountry(){
+  const input = document.getElementById('countryInput');
+  const raw = input.value.trim();
+  const errBox = document.getElementById('countryErrorBox');
+  errBox.style.display = 'none';
+  if(!raw) return;
+
+  let q = normalize(raw);
+  q = COUNTRY_ALIASES[q] || q;
+
+  const pool = MODES[currentMode].data();
+  const matches = pool.filter(p => {
+    const c = normalize(p.country);
+    return c === q || c.includes(q) || q.includes(c);
+  });
+
+  if(!matches.length){
+    errBox.textContent = `No entries found for "${raw}". Try the full country name (e.g. "United Kingdom" not "UK").`;
+    errBox.style.display = 'block';
+    return;
+  }
+
+  const existingNames = new Set(entries.map(e => e.name));
+  let added = 0;
+  matches.forEach(p => {
+    if(!existingNames.has(p.name)){
+      entries.push({name:p.name, country:p.country, dates:p.dates, x:p.x, y:p.y, blurb:p.blurb, flags:p.flags||null});
+      existingNames.add(p.name);
+      added++;
+    }
+  });
+
+  if(added === 0){
+    errBox.textContent = `All ${matches.length} entries for "${raw}" are already plotted.`;
+    errBox.style.display = 'block';
+  }
+
+  input.value = '';
+  renderAll();
+  save();
+}
+document.getElementById('countryAddBtn').addEventListener('click', addAllFromCountry);
+document.getElementById('countryInput').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter') addAllFromCountry();
+});
+
 function plotName(){
   const input = document.getElementById('nameInput');
   const name = input.value.trim();
@@ -426,7 +489,7 @@ function updateBearing(){
   const legend = document.getElementById('legendBox');
   if(currentMode === 'politicians'){
     legend.innerHTML = `
-      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;border:2.5px solid #C0392B;vertical-align:middle;margin-right:5px;"></span>War crimes / crimes against humanity — ICC or tribunal indictment or conviction</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;border:2.5px solid #C0392B;vertical-align:middle;margin-right:5px;"></span>War crimes / crimes against humanity — tribunal indictment/conviction (ICC, ICTY, Nuremberg, etc.) or extensively documented historical atrocities pre-dating such tribunals</span>
       <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;border:2.5px solid #8E5FD9;vertical-align:middle;margin-right:5px;"></span>Corruption — court conviction</span>
     `;
     legend.style.display = 'flex';
