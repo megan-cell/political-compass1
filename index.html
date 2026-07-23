@@ -231,6 +231,7 @@ function renderPoints(){
     }
     circle.style.cursor = 'grab';
     circle.addEventListener('pointerdown', (ev)=>startDrag(ev, i));
+    circle.addEventListener('click', (ev)=> selectEntry(i));
     g.appendChild(circle);
     const text = document.createElementNS(ns,'text');
     text.setAttribute('x',x);text.setAttribute('y',y+3.5);
@@ -243,13 +244,16 @@ function renderPoints(){
   });
 }
 
+let dragMoved = false;
 function startDrag(ev, index){
   dragTarget = index;
+  dragMoved = false;
   ev.target.setPointerCapture(ev.pointerId);
   ev.target.style.cursor = 'grabbing';
 }
 svg.addEventListener('pointermove', (ev)=>{
   if(dragTarget===null) return;
+  dragMoved = true;
   const {nx, ny} = pointerToCoords(ev);
   entries[dragTarget].x = nx; entries[dragTarget].y = ny;
   renderPoints();
@@ -257,6 +261,18 @@ svg.addEventListener('pointermove', (ev)=>{
 window.addEventListener('pointerup', ()=>{
   if(dragTarget!==null){ dragTarget = null; save(); }
 });
+
+function selectEntry(index){
+  if(dragMoved){ dragMoved = false; return; }
+  const [item] = entries.splice(index, 1);
+  entries.unshift(item);
+  renderAll();
+  save();
+}
+
+function wikiUrl(name){
+  return 'https://en.wikipedia.org/wiki/' + encodeURIComponent(name.trim().replace(/\s+/g, '_'));
+}
 
 function pointerToCoords(ev){
   const rect = svg.getBoundingClientRect();
@@ -297,7 +313,7 @@ function renderList(){
       <div class="dot" style="background:${color}"></div>
       <div class="entry-body">
         <div class="entry-name">${i+1}. ${escapeHtml(e.name)}</div>
-        <div class="entry-meta">${escapeHtml(e.country||'')} · ${escapeHtml(e.dates||'')}</div>
+        <div class="entry-meta">${escapeHtml(e.country||'')} · ${escapeHtml(e.dates||'')} · <a href="${wikiUrl(e.name)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">Wikipedia ↗</a></div>
         <div class="entry-blurb">${escapeHtml(e.blurb||'')}</div>
         ${e.flags && e.flags.length ? `<div style="margin-top:4px;">${e.flags.map(f=>{
           const cfg = f==='warcrimes' ? {c:'#C0392B',l:'WAR CRIMES'} : f==='corruption' ? {c:'#8E5FD9',l:'CORRUPTION'} : {c:'#2E9E6B',l:'STATE MEDIA'};
